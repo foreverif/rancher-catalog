@@ -319,7 +319,7 @@ controller-manager:
         - --address=0.0.0.0
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
-        - --pv-recycler-pod-template-filepath-hostpath/recycler-for-hostpath.yaml
+        - --pv-recycler-pod-template-filepath-hostpath=/etc/kubernetes/recycler-for-hostpath.yaml
     environment:
         CLOUD_PROVIDER: ${CLOUD_PROVIDER}
         {{- if ne .Values.HTTP_PROXY "" }}
@@ -344,12 +344,12 @@ controller-manager:
     links:
         - kubernetes
     volumeMounts:
-        - mountPath: "/etc/kubernetes/recycler-for-hostpath.yaml"
+        - mountPath: /etc/kubernetes/recycler-for-hostpath.yaml
           name: recycler-hostpath
     volumes:
         - name: recycler-hostpath
           hostPath:
-            path: "/etc/kubernetes/recycler-for-hostpath.yaml"
+            path: /etc/kubernetes/recycler-for-hostpath.yaml
 
 rancher-kubernetes-agent:
     labels:
