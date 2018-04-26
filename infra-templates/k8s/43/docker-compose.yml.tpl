@@ -343,13 +343,8 @@ controller-manager:
         io.rancher.container.agent.role: environmentAdmin
     links:
         - kubernetes
-    volumeMounts:
-        - mountPath: /etc/kubernetes/recycler-for-hostpath.yaml
-          name: recycler-hostpath
     volumes:
-        - name: recycler-hostpath
-          hostPath:
-            path: /etc/kubernetes/recycler-for-hostpath.yaml
+        - /etc/kubernetes:/etc/kubernetes
 
 rancher-kubernetes-agent:
     labels:
